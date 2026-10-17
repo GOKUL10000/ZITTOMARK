@@ -12,6 +12,7 @@ Sharing-build checks completed on Windows:
 - The official MCP SDK client listed all **nine tools**, called status/voices, submitted speech, polled completion, and converted its generated recording to a built-in target voice. Both WAV files were saved.
 - Short Tamil and creative English jobs produced finite, non-silent 24 kHz audio in the portable checkout.
 - Generated Codex TOML and Claude JSON configuration snippets parsed and agreed on the adapter executable. They were not installed into the user's global AI-client settings.
+- The separate agent environment installed from its lock file using Windows PowerShell. Its MCP client successfully called `start_studio`, status and voices; startup logs use files to avoid inherited Windows pipe handles keeping the tool call open.
 - The repository/ZIP allowlist excludes private data, recordings, model weights, caches, logs and local connection snippets.
 
 The source application's five-minute conversion path was previously exercised with a full 300-second recording. This release retains that same bounded conversion implementation. Five-minute processing time varies with hardware. No private test recordings, generated files or machine-specific reports are published.

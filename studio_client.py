@@ -115,9 +115,15 @@ class StudioClient:
             raise RuntimeError('Automatic startup requires Windows. Run the server manually on other systems.')
         # Never run a user-provided command. Launch only this checkout's fixed script.
         environment = dict(os.environ, OVS_PORT=str(urlsplit(self.url).port))
-        result = subprocess.run(['powershell.exe', '-NoProfile', '-ExecutionPolicy', 'Bypass',
-            '-File', str(APP / 'Launch.ps1'), '-NoBrowser'], capture_output=True,
-            text=True, timeout=45, cwd=APP, env=environment)
+        log = APP / 'data' / 'logs' / 'agent-start.log'
+        log.parent.mkdir(parents=True, exist_ok=True)
+        # Windows descendants can retain inherited pipe handles after PowerShell exits.
+        # Use a file and detached stdin so completion never waits on a server-held pipe.
+        with log.open('w', encoding='utf-8') as stream:
+            result = subprocess.run(['powershell.exe', '-NoProfile', '-NonInteractive',
+                '-ExecutionPolicy', 'Bypass', '-File', str(APP / 'Launch.ps1'), '-NoBrowser'],
+                stdin=subprocess.DEVNULL, stdout=stream, stderr=subprocess.STDOUT,
+                timeout=45, cwd=APP, env=environment, creationflags=subprocess.CREATE_NO_WINDOW)
         if result.returncode:
-            raise RuntimeError(result.stderr.strip()[-1500:] or 'Studio startup failed.')
+            raise RuntimeError(log.read_text(encoding='utf-8', errors='replace').strip()[-1500:] or 'Studio startup failed.')
         return self.status()

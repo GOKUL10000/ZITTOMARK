@@ -70,7 +70,7 @@ Example instruction for your agent:
 
 For conversions, explicitly provide the local file path and target voice. For creative delivery, choose `mode="creative"`, `language="en"`, and a description such as “A sly, playful storyteller with a low, whispery voice and clearly articulated words.” Feelings and similarity are approximate; see the README.
 
-Jobs are asynchronous so generation does not keep an MCP tool call open for several minutes. Call `get_job` at sensible intervals (for example every 2–5 seconds). Only one audio job runs at once; a second submission returns a busy error. Job state is in memory and disappears when the app restarts; completed recordings remain on disk and in history. An MCP adapter restart does not stop the studio or its active job.
+Jobs are asynchronous so generation does not keep an MCP tool call open for several minutes. Call `get_job` at sensible intervals (for example every 2–5 seconds). Only one audio job runs at once; a second submission returns a busy error. Job state is in memory and disappears when the app restarts; completed recordings remain on disk and in history. For an independent studio session, start it with `Start-Local-Voice.cmd` before connecting. A client's process cleanup on disconnect can stop a studio it launched.
 
 ## Command line and HTTP tools
 
