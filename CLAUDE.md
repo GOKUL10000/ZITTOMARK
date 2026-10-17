@@ -1,0 +1,1 @@
+Read [AGENTS.md](AGENTS.md) for repository guidance, [README.md](README.md) for setup, and [docs/AGENT_INTEGRATION.md](docs/AGENT_INTEGRATION.md) for the local MCP/CLI interface. Do not commit personal audio or machine-specific configuration.

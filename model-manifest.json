@@ -1,0 +1,98 @@
+[
+  {
+    "revision": "5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18",
+    "file": "ve.pt",
+    "size": 5698626,
+    "repo": "ResembleAI/chatterbox",
+    "folder": "base",
+    "sha256": "4b16d836bc598509860f6fa068165a8bb5e9ac84f05582dfcf278a5a372879f1"
+  },
+  {
+    "revision": "5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18",
+    "file": "t3_mtl23ls_v2.safetensors",
+    "size": 2143989752,
+    "repo": "ResembleAI/chatterbox",
+    "folder": "base",
+    "sha256": "b1237586127ce98e7800a68e49938eb5092846862aabcb6e17b2fda7889a6c75"
+  },
+  {
+    "revision": "5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18",
+    "file": "s3gen.pt",
+    "size": 1057165844,
+    "repo": "ResembleAI/chatterbox",
+    "folder": "base",
+    "sha256": "9b9ff07e60b20c136e2b1b3d7563a24604e8d2c4c267888d1ee929dd0151d2a3"
+  },
+  {
+    "revision": "5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18",
+    "file": "grapheme_mtl_merged_expanded_v1.json",
+    "size": 69989,
+    "repo": "ResembleAI/chatterbox",
+    "folder": "base",
+    "sha256": "69632f47220a788a52ce2661d096453c5655e9bf25289d89a8d832c46ee07dbf"
+  },
+  {
+    "revision": "5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18",
+    "file": "conds.pt",
+    "size": 107374,
+    "repo": "ResembleAI/chatterbox",
+    "folder": "base",
+    "sha256": "6552d70568833628ba019c6b03459e77fe71ca197d5c560cef9411bee9d87f4e"
+  },
+  {
+    "revision": "5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18",
+    "file": "Cangjie5_TC.json",
+    "size": 1920163,
+    "repo": "ResembleAI/chatterbox",
+    "folder": "base",
+    "sha256": "7073fd9de919443ae88e0bd2449917a65fe54898a4413ed1edcc4b67f28bce8c"
+  },
+  {
+    "revision": "5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18",
+    "file": "README.md",
+    "size": 10081,
+    "repo": "ResembleAI/chatterbox",
+    "folder": "base",
+    "sha256": "6ac86d5ec7e85a9cf6566a34c6aae60ac1d50a6fceccade4c2aa57cfa6f590b4"
+  },
+  {
+    "revision": "283dc9184bd6ece5d71f5ed4e5dc25e020bf3c8f",
+    "file": "checkpoints/best.pt",
+    "size": 165167621,
+    "repo": "reenigne314/chatterbox-indic-lora",
+    "folder": "indic",
+    "sha256": "6c98f0b939a636e62265c795246aa85762c3fef427fed73904a0236bb54bf18d"
+  },
+  {
+    "revision": "283dc9184bd6ece5d71f5ed4e5dc25e020bf3c8f",
+    "file": "tokenizer/extended_tokenizer.json",
+    "size": 151977,
+    "repo": "reenigne314/chatterbox-indic-lora",
+    "folder": "indic",
+    "sha256": "1293301b22d97e0a4569d3e26bc2e2180ed272ad887ff49413e67d61bff64943"
+  },
+  {
+    "revision": "283dc9184bd6ece5d71f5ed4e5dc25e020bf3c8f",
+    "file": "conds/ta_female.pt",
+    "size": 167979,
+    "repo": "reenigne314/chatterbox-indic-lora",
+    "folder": "indic",
+    "sha256": "f13709776090c92cd3c5183bdcf546247c65068f3e2480cbada0e13ed88a785c"
+  },
+  {
+    "revision": "283dc9184bd6ece5d71f5ed4e5dc25e020bf3c8f",
+    "file": "conds/ta_male.pt",
+    "size": 168145,
+    "repo": "reenigne314/chatterbox-indic-lora",
+    "folder": "indic",
+    "sha256": "22a2ee12786dcffe79ec297ff228b2a83d3c69e7dc8c761d78221711280542fc"
+  },
+  {
+    "revision": "283dc9184bd6ece5d71f5ed4e5dc25e020bf3c8f",
+    "file": "README.md",
+    "size": 11447,
+    "repo": "reenigne314/chatterbox-indic-lora",
+    "folder": "indic",
+    "sha256": "7416296317dec657ef994b1511d1f5be7a582b198f987ed6704e9474d39c4ca2"
+  }
+]

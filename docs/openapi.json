@@ -1,0 +1,377 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "ZITTOMARK Local Voice Studio",
+    "version": "1.0.0",
+    "description": "Local speech REST API, not a chat API. Get / and extract studio-token meta for POST. Jobs are asynchronous; poll until done/error."
+  },
+  "servers": [
+    {
+      "url": "http://127.0.0.1:7865"
+    }
+  ],
+  "paths": {
+    "/api/health": {
+      "get": {
+        "summary": "Read app readiness and busy status",
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Invalid input"
+          },
+          "403": {
+            "description": "Invalid host, origin or session token"
+          },
+          "409": {
+            "description": "Audio job busy"
+          }
+        }
+      }
+    },
+    "/api/state": {
+      "get": {
+        "summary": "Read voices, feelings, presets, private history and storage",
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Invalid input"
+          },
+          "403": {
+            "description": "Invalid host, origin or session token"
+          },
+          "409": {
+            "description": "Audio job busy"
+          }
+        }
+      }
+    },
+    "/api/jobs/{id}": {
+      "get": {
+        "summary": "Poll a submitted job",
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Invalid input"
+          },
+          "403": {
+            "description": "Invalid host, origin or session token"
+          },
+          "409": {
+            "description": "Audio job busy"
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ]
+      }
+    },
+    "/audio/{id}.wav": {
+      "get": {
+        "summary": "Read a saved WAV",
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Invalid input"
+          },
+          "403": {
+            "description": "Invalid host, origin or session token"
+          },
+          "409": {
+            "description": "Audio job busy"
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ]
+      }
+    },
+    "/api/generate": {
+      "post": {
+        "summary": "Submit speech and return job ID",
+        "responses": {
+          "202": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Invalid input"
+          },
+          "403": {
+            "description": "Invalid host, origin or session token"
+          },
+          "409": {
+            "description": "Audio job busy"
+          }
+        },
+        "security": [
+          {
+            "StudioToken": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "text": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 2000
+                  },
+                  "language": {
+                    "type": "string",
+                    "enum": [
+                      "en",
+                      "ta"
+                    ]
+                  },
+                  "voice": {
+                    "type": "string"
+                  },
+                  "feeling": {
+                    "type": "string",
+                    "default": "neutral"
+                  },
+                  "expression": {
+                    "type": "number",
+                    "minimum": 0,
+                    "maximum": 1,
+                    "default": 0.7
+                  },
+                  "mode": {
+                    "type": "string",
+                    "enum": [
+                      "classic",
+                      "creative"
+                    ],
+                    "default": "classic"
+                  },
+                  "description": {
+                    "type": "string"
+                  },
+                  "seed": {
+                    "type": "integer",
+                    "default": 42
+                  }
+                },
+                "required": [
+                  "text",
+                  "language",
+                  "voice"
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/convert": {
+      "post": {
+        "summary": "Submit base64 mono 24 kHz WAV, 1–300 seconds; return job ID",
+        "responses": {
+          "202": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Invalid input"
+          },
+          "403": {
+            "description": "Invalid host, origin or session token"
+          },
+          "409": {
+            "description": "Audio job busy"
+          }
+        },
+        "security": [
+          {
+            "StudioToken": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "audio": {
+                    "type": "string",
+                    "contentEncoding": "base64"
+                  },
+                  "name": {
+                    "type": "string"
+                  },
+                  "target": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "audio",
+                  "target"
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/voices": {
+      "post": {
+        "summary": "Save a 3–30 second authorized reference (first 15 seconds retained)",
+        "responses": {
+          "201": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Invalid input"
+          },
+          "403": {
+            "description": "Invalid host, origin or session token"
+          },
+          "409": {
+            "description": "Audio job busy"
+          }
+        },
+        "security": [
+          {
+            "StudioToken": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "audio": {
+                    "type": "string",
+                    "contentEncoding": "base64"
+                  },
+                  "name": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "audio",
+                  "name"
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/storage": {
+      "post": {
+        "summary": "Choose an absolute local output directory",
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Invalid input"
+          },
+          "403": {
+            "description": "Invalid host, origin or session token"
+          },
+          "409": {
+            "description": "Audio job busy"
+          }
+        },
+        "security": [
+          {
+            "StudioToken": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "directory": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "directory"
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/storage/open": {
+      "post": {
+        "summary": "Open the current output folder in Windows Explorer",
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Invalid input"
+          },
+          "403": {
+            "description": "Invalid host, origin or session token"
+          },
+          "409": {
+            "description": "Audio job busy"
+          }
+        },
+        "security": [
+          {
+            "StudioToken": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {}
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "StudioToken": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "X-Studio-Token"
+      }
+    }
+  }
+}

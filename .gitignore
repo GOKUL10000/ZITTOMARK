@@ -1,0 +1,30 @@
+# Personal audio, scripts' live settings and generated metadata.
+/data/
+/outputs/
+*.wav
+*.mp3
+*.m4a
+*.flac
+*.ogg
+*.webm
+*.worker.log
+*.partial
+*.ranges
+*.safetensors
+*.pt
+*.onnx
+# Private Python installations and caches.
+/.runtime/
+/.venv/
+/qwen-venv/
+/models/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+tests/voice-storage-test-*/
+.env
+.env.*
+!.env.example
+*.log
+.DS_Store
+Thumbs.db
