@@ -1,3 +1,3 @@
 @echo off
-powershell.exe -NoProfile -ExecutionPolicy Bypass -File "%~dp0Setup.ps1" -Creative
-pause
+call "%~dp0Install.cmd" --creative %*
+exit /b %ERRORLEVEL%

@@ -6,16 +6,19 @@ Speech runs on your computer after the initial package/model downloads. No cloud
 
 ## Install on a friend's Windows PC
 
-1. Install **64-bit Python 3.11** from [python.org](https://www.python.org/downloads/release/python-3119/) and [Git for Windows](https://git-scm.com/download/win). Enable Python's launcher/PATH options. Update the NVIDIA driver.
-2. Download this repository using **Code → Download ZIP**, then extract it to a writable local folder. Keep all files together; avoid installing inside Program Files.
-3. Double-click **`Setup.cmd`**. This installs a private Python environment and downloads the pinned English/Tamil models. Allow it to finish; the first setup needs internet access and several GB of downloads.
-4. Double-click **`Start-Local-Voice.cmd`**. Open **http://127.0.0.1:7865/** if the browser does not open. Use **`Stop-Local-Voice.cmd`** when finished.
-5. Optional: run **`Setup-Creative.cmd`** for English creative voice design and custom delivery tags. This adds a separate model/environment and substantial downloads.
-6. Optional: run **`Setup-Agents.cmd`** for MCP support, then follow [Connect an AI tool](docs/AGENT_INTEGRATION.md).
+1. Download this repository using **Code → Download ZIP**, then **extract the ZIP** to a writable local folder. Keep all files together; avoid installing inside Program Files.
+2. Double-click **`Install.cmd`**, read the download plan, and press **Y** to continue. It automatically downloads a private Python runtime, the pinned dependencies, English/Tamil models, creative English model and MCP support. You do **not** need to install Python or Git yourself. No administrator rights or PowerShell policy changes are required.
+3. When it says **Installation complete**, double-click **`Start-Local-Voice.cmd`**. Open **http://127.0.0.1:7865/** if the browser does not open. Use **`Stop-Local-Voice.cmd`** when finished.
+
+You need **Windows 10/11 x64, a working NVIDIA GPU driver, internet for installation and about 40 GB free**. The installer checks the GPU driver; it does not silently install GPU drivers. Windows' built-in curl, tar and hash utility handle the initial download. The first setup can take a while; progress stages are shown and details go to `data/logs/install.log`. If interrupted, correct the error and run it again; verified downloads are reused.
+
+For a smaller installation, double-click **`Setup.cmd`** (English/Tamil, conversion and MCP; no creative model), or run `Install.cmd --basic`. **`Setup-Creative.cmd`** installs the full profile. **`Setup-Agents.cmd`** installs just the MCP adapter. Use `Install.cmd --plan` to display the plan without downloading or changing anything; `--yes` accepts the displayed install plan for unattended setup. Connect your coding agent using [these instructions](docs/AGENT_INTEGRATION.md).
+
+**Review [SECURITY.md](SECURITY.md) before installing.** Download integrity checks reduce accidental substitution; they do not prove dependencies are safe. No independent security audit or OS-level sandbox is claimed.
 
 ### Hardware and storage
 
-The supplied setup targets **64-bit Windows, an NVIDIA CUDA GPU, and Python 3.11**. It was exercised on an RTX 5060. Budget **40 GB of free disk space** for both speech environments, models, caches, and temporary creative-model shards; actual use depends on options and pip caches. Large models also use system memory/pagefile space. Performance and memory requirements vary; CPU compatibility fallback is slow and is not the supported first-install target. macOS, Linux, AMD, and Intel GPU installation are not packaged here.
+The supplied setup targets **Windows 10/11 x64 and an NVIDIA CUDA GPU** and privately installs Python 3.11.15. It was exercised on an RTX 5060. Budget **40 GB of free disk space** for both speech environments, models, caches, and temporary creative-model shards; the basic profile checks for 20 GB and agent-only setup for 2 GB. Actual use depends on options and caches. Large models also use system memory/pagefile space. Performance and memory requirements vary; CPU compatibility fallback is slow and is not the supported first-install target. macOS, Linux, Windows ARM64, AMD, and Intel GPU installation are not packaged here.
 
 The private runtime defaults to `%LOCALAPPDATA%\Zittomark\runtime`. Packages do not replace system Python packages. Generated audio, saved reference voices, logs, and settings live in this extracted app's `data` folder. Change **Save generations to** in the app to choose another local folder. Older generations stay where they were saved.
 
@@ -51,7 +54,7 @@ The CLI itself uses only Python's standard library. Conversion normalization use
 
 ## Privacy and security
 
-The server binds to `127.0.0.1`, validates Host/Origin, and requires a session token for writes. The adapter connects only to a literal loopback address, disables HTTP proxies and rejects redirects. Local inference blocks non-loopback network connections. Setup is online and downloads executable Python dependencies and model files; review the pinned lockfiles, manifests and [third-party notices](THIRD_PARTY.md). The session token is a browser-request protection, not user authentication: other processes on your Windows account can access this local service.
+The server binds to `127.0.0.1`, validates Host/Origin, rejects cross-site browser reads of API/audio routes, and requires a session token for writes. The adapter connects only to a literal loopback address, disables HTTP proxies and rejects redirects. Inference uses offline settings and a Python network guard, which is **not an OS-level sandbox**. Setup is online and downloads executable third-party dependencies and models. Package versions/source revisions and artifact hashes are pinned; installation requires matching hashes, uses one explicit PyPI index and direct official CUDA-wheel URLs, and pins source build tools. Review [SECURITY.md](SECURITY.md), the lockfiles/manifests and [third-party notices](THIRD_PARTY.md). The session token protects browser requests; it is **not user authentication**. Other processes running under your Windows account can access text, history, audio, paths and local files.
 
 The adapter exposes only named speech, voice, folder and status actions; it has no arbitrary command execution tool. Your AI client can still receive the text, paths and tool results it requests; its own privacy settings apply. Generated connection snippets contain your local paths and are ignored by Git. No agent's global configuration is changed automatically.
 

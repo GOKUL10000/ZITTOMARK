@@ -1,0 +1,15 @@
+{
+  "uv": {
+    "version": "0.11.7",
+    "url": "https://github.com/astral-sh/uv/releases/download/0.11.7/uv-x86_64-pc-windows-msvc.zip",
+    "archive_sha256": "fe0c7815acf4fc45f8a5eff58ed3cf7ae2e15c3cf1dceadbd10c816ec1690cc1",
+    "executable_sha256": "831730243cf7bbd496ff96353dcdba6f5d4dcbd22576af398130381ab44ac160",
+    "source": "https://github.com/astral-sh/uv/releases/tag/0.11.7"
+  },
+  "python": {
+    "version": "3.11.15",
+    "provider": "Astral python-build-standalone via pinned uv",
+    "no_registry": true,
+    "no_bin": true
+  }
+}

@@ -185,6 +185,10 @@ class Handler(BaseHTTPRequestHandler):
         if not self.valid_host():
             return self.send({"error": "Local connections only"}, 403)
         route = urlparse(self.path).path
+        if route.startswith(('/api/', '/audio/')):
+            origin = self.headers.get('Origin')
+            if (origin and origin not in (ORIGIN, f'http://localhost:{PORT}')) or self.headers.get('Sec-Fetch-Site') == 'cross-site':
+                return self.send({'error': 'Local studio requests only'}, 403)
         if route == "/api/health":
             return self.send({"app": "offline-voice-studio", "offline": True, "pid": os.getpid(), "app_root": str(APP), "busy": ACTIVE.locked(), "inference": "isolated workers"})
         if route == '/api/openapi.json':

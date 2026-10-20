@@ -9,8 +9,9 @@ The application wrapper is MIT licensed. Dependencies and downloaded models keep
 | Tamil LoRA, tokenizer and speaker conditionings | [reenigne314/chatterbox-indic-lora](https://huggingface.co/reenigne314/chatterbox-indic-lora) | MIT according to the model source |
 | Optional English VoiceDesign | [Qwen3-TTS model](https://huggingface.co/Qwen/Qwen3-TTS-12Hz-1.7B-VoiceDesign), [code](https://github.com/QwenLM/Qwen3-TTS) | Apache-2.0 according to their sources |
 | Audio watermarking | [Resemble AI Perth](https://github.com/resemble-ai/Perth) | Installed from a pinned upstream commit; retain its installed license and watermark |
+| Automatic installer and private Python | [Astral uv 0.11.7](https://github.com/astral-sh/uv/releases/tag/0.11.7), [python-build-standalone](https://github.com/astral-sh/python-build-standalone) | uv: MIT/Apache-2.0; Python distribution and bundled libraries retain their respective notices; downloaded separately |
 | MCP Python SDK | [modelcontextprotocol/python-sdk](https://github.com/modelcontextprotocol/python-sdk) | MIT; installed separately using `requirements-agent.lock` |
-| PyTorch, Transformers, NumPy, SciPy, SoundFile and other libraries | See the three requirements lock files | Their respective upstream licenses |
+| PyTorch, Transformers, NumPy, SciPy, SoundFile, source build backends and other libraries | See `requirements-*.lock` | Their respective upstream licenses; versions and accepted artifact SHA-256 values are pinned |
 
 Model revisions, file sizes and SHA-256 checksums are pinned in the model manifests. Setup downloads weights from their official model repositories; weights are not redistributed in this Git repository.
 

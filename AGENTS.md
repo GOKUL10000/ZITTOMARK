@@ -10,12 +10,13 @@ This is a Windows, local-only speech application. Read README.md and docs/AGENT_
 - `conversion_worker.py`, `conversion_audio.py`, `conversion_segments.py`: direct speech conversion and bounded long-audio handling.
 - `output_storage.py`: persistent local output paths and previous-folder history.
 - `web/`: static interface; serve it through the Python server.
-- `runtime_paths.py`, setup/launch scripts: portable per-user runtime and lifecycle.
+- `Install.cmd`, `bootstrap-lock.json`, `installer.py`, `requirements-*.lock`: checksum-verified automatic private Python/package/model installation; no PowerShell bypass or manual Git dependency.
+- `runtime_paths.py`, `launcher.py` and `.cmd` launchers: portable per-user runtime and owned-process lifecycle.
 - `studio_client.py`, `studio_cli.py`, `mcp_server.py`: shared HTTP client, JSON CLI and official MCP stdio adapter.
 
 ## Development rules
 
-Keep the loopback bind, Host/Origin/session-token protections, and offline inference guard. Do not open public ports, add tunneling, run arbitrary agent-provided shell commands, or log session tokens. Use separate classic, creative and MCP environments so their dependencies do not conflict. Setup/downloads can be online; inference must stay local.
+Keep the loopback bind, Host/Origin/session-token/cross-site protections, and offline inference guard. Do not open public ports, add tunneling, run arbitrary agent-provided shell commands, or log session tokens. Use separate classic, creative and MCP environments so their dependencies do not conflict. Setup/downloads can be online; inference must stay local. Maintain bootstrap/package/model checksum checks and pin source build backends. Do not reintroduce execution-policy bypass, a second general package index, mutable Git references or unpinned build isolation. Read SECURITY.md for the limits of these protections; neither a sandbox nor an independent audit is claimed.
 
 Never commit `data/`, recordings, generated audio, saved voice metadata, machine-specific agent snippets, local paths/usernames, model weights, venvs, logs, caches, or credentials. Models use revision/size/hash manifests and download separately. Do not bundle commercial voice samples or claim exact likeness/emotion.
 

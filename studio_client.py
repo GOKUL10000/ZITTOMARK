@@ -117,11 +117,11 @@ class StudioClient:
         environment = dict(os.environ, OVS_PORT=str(urlsplit(self.url).port))
         log = APP / 'data' / 'logs' / 'agent-start.log'
         log.parent.mkdir(parents=True, exist_ok=True)
-        # Windows descendants can retain inherited pipe handles after PowerShell exits.
+        # Windows descendants can retain inherited pipe handles after a launcher exits.
         # Use a file and detached stdin so completion never waits on a server-held pipe.
         with log.open('w', encoding='utf-8') as stream:
-            result = subprocess.run(['powershell.exe', '-NoProfile', '-NonInteractive',
-                '-ExecutionPolicy', 'Bypass', '-File', str(APP / 'Launch.ps1'), '-NoBrowser'],
+            result = subprocess.run([str(RUNTIME / '.venv' / 'Scripts' / 'python.exe'),
+                str(APP / 'launcher.py'), 'start', '--no-browser'],
                 stdin=subprocess.DEVNULL, stdout=stream, stderr=subprocess.STDOUT,
                 timeout=45, cwd=APP, env=environment, creationflags=subprocess.CREATE_NO_WINDOW)
         if result.returncode:

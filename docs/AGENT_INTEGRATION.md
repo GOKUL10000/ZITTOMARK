@@ -1,6 +1,6 @@
 # Connect an AI tool
 
-First install and start the speech app using the README. For MCP, also run `Setup-Agents.cmd`. This creates a **separate** `agent-venv` using the pinned official Python MCP SDK; it does not change the speech environments or any AI client's settings.
+First install and start the speech app using the README. Both `Install.cmd` and the smaller `Setup.cmd` profile include MCP automatically. To add only MCP to an existing installation, run `Setup-Agents.cmd`. A **separate** `agent-venv` uses the pinned official Python MCP SDK; no AI client's global settings are changed automatically. The initial bootstrap obtains private Python automatically without requiring a manual Python/Git installation.
 
 Setup generates three local snippets in **`data/agent-config`**, with the correct absolute paths for this PC. Regenerate them by running `agent_config.py` if you move the repository or change its runtime/port. Do not share these machine-specific snippets as your friend's settings; your friend runs their own setup.
 
